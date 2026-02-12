@@ -108,6 +108,16 @@
             </router-link>
           </p>
         </div>
+
+        <!-- Back to Home Link -->
+        <div class="mt-4 pt-4 border-t border-gray-700 text-center">
+          <router-link to="/" class="text-gray-500 hover:text-gray-300 text-sm flex items-center justify-center transition">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Volver al Catálogo
+          </router-link>
+        </div>
       </div>
     </div>
   </div>

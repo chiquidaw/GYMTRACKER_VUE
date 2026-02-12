@@ -6,7 +6,9 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      name: 'catalog',
+      component: () => import('@/views/CatalogView.vue'),
+      meta: { requiresAuth: false },
     },
     {
       path: '/login',
@@ -24,6 +26,12 @@ const router = createRouter({
       path: '/my-routines',
       name: 'my-routines',
       component: () => import('@/views/MyRoutinesView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/categories',
+      name: 'categories',
+      component: () => import('@/views/CategoryView.vue'),
       meta: { requiresAuth: true },
     },
     // Add more protected routes here as needed

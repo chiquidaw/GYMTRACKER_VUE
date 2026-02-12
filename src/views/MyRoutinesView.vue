@@ -1,27 +1,10 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-    <!-- Navigation Bar -->
-    <nav class="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex items-center">
-            <h1 class="text-2xl font-bold text-white">Gym Tracker</h1>
-          </div>
-          <div class="flex items-center space-x-4">
-            <span class="text-gray-300">{{ user?.name || user?.email }}</span>
-            <button
-              @click="handleLogout"
-              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
-            >
-              Cerrar Sesión
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
+  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex flex-col">
+    <!-- Header Component -->
+    <AppHeader />
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
       <div class="mb-8">
         <h2 class="text-3xl font-bold text-white mb-2">Mis Rutinas</h2>
         <p class="text-gray-400">Gestiona tus rutinas de entrenamiento personalizadas</p>
@@ -41,21 +24,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Footer Component -->
+    <AppFooter />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
-
-const router = useRouter()
-const authStore = useAuthStore()
-
-const user = computed(() => authStore.currentUser)
-
-const handleLogout = async () => {
-  await authStore.logout()
-  router.push('/login')
-}
+import AppHeader from '@/components/AppHeader.vue'
+import AppFooter from '@/components/AppFooter.vue'
 </script>

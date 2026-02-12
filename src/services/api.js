@@ -5,6 +5,7 @@ const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL || 'http://localhost/api',
     headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
     },
 })
 
@@ -12,7 +13,7 @@ const api = axios.create({
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('auth_token')
-        if (token) {
+        if (token && token !== 'null' && token !== 'undefined') {
             config.headers.Authorization = `Bearer ${token}`
         }
         return config

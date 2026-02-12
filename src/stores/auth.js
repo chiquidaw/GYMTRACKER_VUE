@@ -54,13 +54,19 @@ export const useAuthStore = defineStore('auth', {
             try {
                 const data = await authService.login(email, password)
 
-                // Store token and user data
-                this.token = data.token
+                // Store token and user data - check both 'token' and 'access_token'
+                const token = data.token || data.access_token
+
+                if (!token) {
+                    throw new Error('No se recibió un token de autenticación del servidor')
+                }
+
+                this.token = token
                 this.user = data.user || { email }
                 this.isAuthenticated = true
 
                 // Persist to localStorage
-                localStorage.setItem('auth_token', data.token)
+                localStorage.setItem('auth_token', token)
                 localStorage.setItem('user_data', JSON.stringify(this.user))
 
                 return { success: true }
@@ -84,12 +90,13 @@ export const useAuthStore = defineStore('auth', {
                 const data = await authService.register(userData)
 
                 // If registration returns token, auto-login
-                if (data.token) {
-                    this.token = data.token
+                const token = data.token || data.access_token
+                if (token) {
+                    this.token = token
                     this.user = data.user || { email: userData.email, name: userData.name }
                     this.isAuthenticated = true
 
-                    localStorage.setItem('auth_token', data.token)
+                    localStorage.setItem('auth_token', token)
                     localStorage.setItem('user_data', JSON.stringify(this.user))
                 }
 
@@ -114,7 +121,7 @@ export const useAuthStore = defineStore('auth', {
                     await authService.logout()
                 }
             } catch (error) {
-                console.error('Error during logout:', error)
+                // Silent fail for logout API
             } finally {
                 // Clear state and localStorage regardless of API call result
                 this.user = null
