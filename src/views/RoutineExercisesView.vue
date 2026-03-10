@@ -53,7 +53,6 @@ const props = defineProps({
     required: true
   }
 })
-console.log(JSON.stringify(props.routine.exercises, null, 2))
 </script>
 
 <style scoped>
