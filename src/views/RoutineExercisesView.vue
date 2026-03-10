@@ -20,7 +20,7 @@
         <div class="flex-1 relative z-10">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-[10px] font-black text-blue-500 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">#{{ index + 1 }}</span>
-            <h4 class="text-2xl font-black text-white tracking-tight">{{ exercise.name }}</h4>
+            <h4 class="text-2xl font-black text-white tracking-tight">{{ exercise.name }}</h4> 
           </div>
           <p class="text-gray-400 text-sm leading-relaxed max-w-xl italic">
             {{ exercise.instruction || 'Configurado para máxima eficiencia y técnica perfecta.' }}
@@ -29,15 +29,15 @@
 
         <div class="flex flex-wrap items-center gap-4 relative z-10">
           <div class="flex flex-col items-center bg-gray-900/80 px-6 py-4 rounded-2xl border border-gray-800 min-w-[100px] shadow-lg">
-            <span class="text-2xl font-black text-white">{{ exercise.pivot?.target_sets || 0 }}</span>
+            <span class="text-2xl font-black text-white">{{ exercise.target_sets || 0 }}</span>
             <span class="text-[9px] text-gray-500 uppercase font-black tracking-widest">Series</span>
           </div>
           <div class="flex flex-col items-center bg-gray-900/80 px-6 py-4 rounded-2xl border border-gray-800 min-w-[100px] shadow-lg">
-            <span class="text-2xl font-black text-blue-400">{{ exercise.pivot?.target_reps || 0 }}</span>
+            <span class="text-2xl font-black text-blue-400">{{ exercise.target_reps || 0 }}</span>
             <span class="text-[9px] text-gray-500 uppercase font-black tracking-widest">Reps</span>
           </div>
           <div class="flex flex-col items-center bg-gray-900/80 px-6 py-4 rounded-2xl border border-gray-800 min-w-[100px] shadow-lg">
-            <span class="text-2xl font-black text-emerald-400">{{ exercise.pivot?.rest_seconds || 0 }}s</span>
+            <span class="text-2xl font-black text-emerald-400">{{ exercise.rest_seconds || 0 }}s</span>
             <span class="text-[9px] text-gray-500 uppercase font-black tracking-widest">Pausa</span>
           </div>
         </div>
@@ -53,6 +53,7 @@ const props = defineProps({
     required: true
   }
 })
+console.log(JSON.stringify(props.routine.exercises, null, 2))
 </script>
 
 <style scoped>

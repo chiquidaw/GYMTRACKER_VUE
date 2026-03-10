@@ -161,7 +161,6 @@ const totalTime = computed(() => {
   }, 0)
   return Math.ceil(totalSeconds / 60)
 })
-
 onMounted(fetchRoutineDetails)
 </script>
 
@@ -186,54 +185,6 @@ onMounted(fetchRoutineDetails)
   scrollbar-width: none;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
-
-<script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import AppHeader from '@/components/AppHeader.vue'
-import AppFooter from '@/components/AppFooter.vue'
-import routineService from '@/services/routineService'
-
-const route = useRoute()
-const routineId = route.params.id
-const routine = ref(null)
-const loading = ref(true)
-
-const fetchRoutineDetails = async () => {
-  loading.value = true
-  try {
-    routine.value = await routineService.getRoutine(routineId)
-  } catch (error) {
-    console.error('Error fetching routine details:', error)
-  } finally {
-    loading.value = false
-  }
-}
-
-const totalTime = computed(() => {
-  if (!routine.value?.exercises) return 0
-  // Simple estimation: (sets * reps * (time_per_rep + rest)) / 60
-  // But let's keep it simpler for now: sum of rest_seconds + fixed overhead per exercise
-  const totalSeconds = routine.value.exercises.reduce((acc, ex) => {
-    return acc + (ex.pivot?.rest_seconds || 0) + (ex.pivot?.sets || 3) * 30
-  }, 0)
-  return Math.ceil(totalSeconds / 60)
-})
-
-onMounted(fetchRoutineDetails)
-</script>
-
-<style scoped>
 .animate-fade-in {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
