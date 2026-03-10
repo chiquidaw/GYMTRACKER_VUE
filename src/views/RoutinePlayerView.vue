@@ -41,16 +41,16 @@
           <!-- Big Stats -->
           <div class="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div class="p-8 bg-gray-900/80 rounded-3xl border border-gray-700 shadow-inner">
-              <span class="block text-6xl font-black text-blue-400 mb-2">{{ currentExercise.pivot?.target_sets || 0 }}</span>
+              <span class="block text-6xl font-black text-blue-400 mb-2">{{ currentExercise.target_sets || 0 }}</span>
               <span class="text-sm text-gray-500 uppercase font-black tracking-widest">Sets</span>
             </div>
             <div class="p-8 bg-gray-900/80 rounded-3xl border border-gray-700 shadow-inner">
-              <span class="block text-6xl font-black text-green-400 mb-2">{{ currentExercise.pivot?.target_reps || 0 }}</span>
+              <span class="block text-6xl font-black text-green-400 mb-2">{{ currentExercise.target_reps || 0 }}</span>
               <span class="text-sm text-gray-500 uppercase font-black tracking-widest">Reps</span>
             </div>
             <div class="p-8 bg-gray-900/80 rounded-3xl border border-gray-700 shadow-inner col-span-2 md:col-span-1">
               <span v-if="!timerActive" class="block text-6xl font-black text-yellow-400 mb-2">
-                {{ currentExercise.pivot?.rest_seconds || 0 }}s
+                {{ currentExercise.rest_seconds || 0 }}s
               </span>
               <span v-else class="block text-6xl font-black text-red-500 mb-2 animate-pulse">
                 {{ timeLeft }}s
